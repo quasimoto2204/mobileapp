@@ -46,20 +46,21 @@ elementSub.addEventListener("click", function () { update("-") });
 elementMult.addEventListener("click", function () { update("*") });
 elementDiv.addEventListener("click", function () { update("/") });
 
-elementEqual.addEventListener("click", dspResult);
+elementEqual.addEventListener("click",dspResult);
 elementCancel.addEventListener("click", clear);
 /** 数字がクリックされたときの処理 */
 function edit(wkInput) {
   // １つ前の入力が数値
   if (wkBefore === "0") {
     elementResult.innerHTML = Number(elementResult.innerHTML + wkInput); //入力値の結合（ゼロサプレスして結合）
-  } else {
+  }
+  // １つ前の入力が、演算子
+  else {
     elementResult.innerHTML = wkInput;
   }
-  wkFirst = "0"; //初回FLG off
-  wkBefore = "0";
+  wkFirst = "0" //初回FLG off
+  wkBefore = "0"
 }
-
 
 /** 演算子がクリックされたときの処理 */
 function update(calcType) {
@@ -133,38 +134,4 @@ function calculator() {
   }
   elementResult.innerHTML = wkTotal;
 
-}
-
-
-document.body.addEventListener("keydown", keydownEvent, false);
-
-function keydownEvent(event) {
-  // Check if the pressed key is a numeric key (0-9)
-  if (["1","2","3","4","5","6","7","8","9","0"].includes(event.key)) {
-    edit(event.key);
-  }
-  switch (event.key) {
-    case "+":
-      update("+");
-      break;
-    case "-":
-      update("-");
-      break;
-    case "*":
-      update("*");
-      break;
-    case "/":
-      update("/");
-      break;
-    case "=":
-    case "Enter":
-      dspResult();
-      break;
-    case "Escape":
-    case "Backspace":
-      clear();
-      break;
-
-      
-  }
 }
